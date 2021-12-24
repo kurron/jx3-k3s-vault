@@ -1,0 +1,22 @@
+apiVersion: jenkins.io/v1
+kind: SourceRepository
+metadata:
+  creationTimestamp: null
+  labels:
+    owner: kurron-jenkins-x-bot
+    provider: github
+    repository: spring-boot-http-gradle
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: kurron-jenkins-x-bot-spring-boot-http-gradle
+  namespace: jx
+spec:
+  httpCloneURL: https://github.com/kurron-jenkins-x-bot/spring-boot-http-gradle.git
+  org: kurron-jenkins-x-bot
+  provider: https://github.com
+  providerKind: github
+  providerName: github
+  repo: spring-boot-http-gradle
+  scheduler:
+    kind: ""
+    name: ""
+  url: https://github.com/kurron-jenkins-x-bot/spring-boot-http-gradle

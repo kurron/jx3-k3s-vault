@@ -10,6 +10,33 @@ data:
         kurron/jx3-k3s-vault: true
     plank: {}
     pod_namespace: jx
+    postsubmits:
+      kurron-jenkins-x-bot/spring-boot-http-gradle:
+      - agent: tekton-pipeline
+        branches:
+        - master
+        - main
+        labels:
+          aadpodidbinding: tekton-bot
+        name: release
+        pipeline_run_spec:
+          pipelineRef:
+            name: jx-meta-pipeline
+          serviceAccountName: tekton-bot
+    presubmits:
+      kurron-jenkins-x-bot/spring-boot-http-gradle:
+      - agent: tekton-pipeline
+        always_run: true
+        context: pr-build
+        labels:
+          aadpodidbinding: tekton-bot
+        name: pr-build
+        pipeline_run_spec:
+          pipelineRef:
+            name: jx-meta-pipeline
+          serviceAccountName: tekton-bot
+        rerun_command: /test this
+        trigger: (?m)^/test( all| this),?(\s+|$)
     prowjob_namespace: jx
     push_gateway:
       serve_metrics: true
@@ -19,6 +46,7 @@ data:
         required-if-present-contexts: null
         skip-unknown-contexts: false
       merge_method:
+        kurron-jenkins-x-bot/spring-boot-http-gradle: merge
         kurron/jx3-k3s-vault: merge
       queries:
       - labels:
@@ -31,6 +59,7 @@ data:
         - needs-rebase
         repos:
         - kurron/jx3-k3s-vault
+        - kurron-jenkins-x-bot/spring-boot-http-gradle
       - labels:
         - updatebot
         missingLabels:
@@ -41,6 +70,7 @@ data:
         - needs-rebase
         repos:
         - kurron/jx3-k3s-vault
+        - kurron-jenkins-x-bot/spring-boot-http-gradle
       target_url: http://lighthouse.jx.76.28.16.197.nip.io/merge/status
 kind: ConfigMap
 metadata:
