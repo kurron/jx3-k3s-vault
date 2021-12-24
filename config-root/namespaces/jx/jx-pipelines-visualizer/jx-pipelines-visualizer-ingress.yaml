@@ -19,7 +19,7 @@ metadata:
   namespace: jx
 spec:
   rules:
-    - host: dashboard.jx.change.me
+    - host: dashboard.jx.76.28.16.197.nip.io
       http:
         paths:
           - pathType: ImplementationSpecific
